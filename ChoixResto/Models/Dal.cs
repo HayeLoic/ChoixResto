@@ -29,5 +29,16 @@ namespace ChoixResto.Models
             bdd.Restos.Add(new Resto { Nom = nom, Telephone = telephone });
             bdd.SaveChanges();
         }
+
+        public void ModifierRestaurant(int id, string nom, string telephone)
+        {
+            Resto restoTrouve = bdd.Restos.FirstOrDefault(resto => resto.Id == id);
+            if (restoTrouve != null)
+            {
+                restoTrouve.Nom = nom;
+                restoTrouve.Telephone = telephone;
+                bdd.SaveChanges();
+            }
+        }
     }
 }
