@@ -15,9 +15,15 @@ namespace ChoixResto.Models
         List<Resto> ObtientTousLesRestaurants();
 
         //Méthodes utilisateur
-        void AjouterUtilisateur(string prenom, string mdp);
+        int AjouterUtilisateur(string prenom, string mdp);
         Utilisateur ObtenirUtilisateur(int id);
         Utilisateur ObtenirUtilisateur(string prenom);
         Utilisateur Authentifier(string prenom, string mdp);
+
+        //Méthodes vote
+        bool ADejaVote(int idSondage, string idUtilisateur);
+
+        //Méthodes sondage
+        int CreerUnSondage();
     }
 }

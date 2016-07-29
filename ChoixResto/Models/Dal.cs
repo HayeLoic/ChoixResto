@@ -67,15 +67,40 @@ namespace ChoixResto.Models
                 return bdd.Utilisateurs.FirstOrDefault(util => util.Prenom == prenom);
         }
 
-        public void AjouterUtilisateur(string prenom, string motDePasse)
+        public int AjouterUtilisateur(string prenom, string motDePasse)
         {
             bdd.Utilisateurs.Add(new Utilisateur { Prenom = prenom, MotDePasse = motDePasse });
             bdd.SaveChanges();
+            return bdd.Utilisateurs.FirstOrDefault(util => util.Prenom == prenom).Id;
         }
 
         public Utilisateur Authentifier(string prenom, string motDePasse)
         {
             return bdd.Utilisateurs.FirstOrDefault(util => util.Prenom == prenom && util.MotDePasse == motDePasse);
+        }
+        #endregion
+
+        #region Vote
+        public bool ADejaVote(int idSondage, string idUtilisateur)
+        {
+            Utilisateur utilisateurTrouve = ObtenirUtilisateur(idUtilisateur);
+            if (utilisateurTrouve == null)
+                return false;
+            else
+            {
+                Vote voteTrouve = bdd.Votes.FirstOrDefault(vote => vote.Sondage.Id == idSondage && vote.Utilisateur.Id == utilisateurTrouve.Id);
+                return (voteTrouve == null ? false : true);
+            }
+        }
+        #endregion
+
+        #region Sondage
+        public int CreerUnSondage()
+        {
+            DateTime datetimeSondage = DateTime.Now;
+            bdd.Sondages.Add(new Sondage { Date = datetimeSondage });
+            bdd.SaveChanges();
+            return bdd.Sondages.FirstOrDefault(sondage => sondage.Date == datetimeSondage).Id;
         }
         #endregion
     }

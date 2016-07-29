@@ -135,7 +135,7 @@ public class DalTests
 
         Assert.IsNull(utilisateur);
     }
-    /*
+    
     [TestMethod]
     public void ADejaVote_AvecIdNonNumerique_RetourneFalse()
     {
@@ -143,7 +143,7 @@ public class DalTests
 
         Assert.IsFalse(pasVote);
     }
-
+    
     [TestMethod]
     public void ADejaVote_UtilisateurNAPasVote_RetourneFalse()
     {
@@ -154,7 +154,7 @@ public class DalTests
 
         Assert.IsFalse(pasVote);
     }
-
+    /*
     [TestMethod]
     public void ADejaVote_UtilisateurAVote_RetourneTrue()
     {
