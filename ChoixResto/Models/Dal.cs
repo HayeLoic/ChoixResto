@@ -148,9 +148,14 @@ namespace ChoixResto.Models
         public int CreerUnSondage()
         {
             DateTime datetimeSondage = DateTime.Now;
-            bdd.Sondages.Add(new Sondage { Date = datetimeSondage });
+
+            //Création du sondage
+            Sondage sondage = new Sondage { Date = datetimeSondage };
+            bdd.Sondages.Add(sondage);
             bdd.SaveChanges();
-            return bdd.Sondages.FirstOrDefault(sondage => sondage.Date == datetimeSondage).Id;
+
+            //On retourne son id
+            return sondage.Id;
         }
         #endregion
 
