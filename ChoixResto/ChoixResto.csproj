@@ -100,6 +100,7 @@
     <Compile Include="Models\Dal.cs" />
     <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\Resto.cs" />
+    <Compile Include="Models\Resultats.cs" />
     <Compile Include="Models\Sondage.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\Vote.cs" />

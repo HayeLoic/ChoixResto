@@ -149,5 +149,42 @@ namespace ChoixResto.Models
             return bdd.Sondages.FirstOrDefault(sondage => sondage.Date == datetimeSondage).Id;
         }
         #endregion
+
+        #region Resultats
+        public List<Resultats> ObtenirLesResultats(int idSondage)
+        {
+            //liste des résultats à générer
+            List<Resultats> lesResultats = new List<Resultats>();
+
+            //On récupère le sondage concerné
+            Sondage sondageTrouve = bdd.Sondages.FirstOrDefault(sondage => sondage.Id == idSondage);
+
+            //On récupère les votes de ce sondage
+            List<Vote> votesTrouves= sondageTrouve.Votes;
+
+
+            //Analyse des votes de la liste
+            foreach (Vote vote in votesTrouves)
+            {
+                //On récupère la ligne de résultat qui correspond au resto du vote analysé
+                Resultats resultats = lesResultats.FirstOrDefault(resultat => resultat.IdResto == vote.Resto.Id);
+
+
+                //Si le vote concerne un resto pas encore dans les résultats => création du résultat
+                if (resultats == null)
+                {
+                    lesResultats.Add(new Resultats { IdResto = vote.Resto.Id, Nom = vote.Resto.Nom, Telephone = vote.Resto.Telephone, NombreDeVotes = 1});
+                }
+
+                //Si le vote concerne un resto deja dans les résultats => incrémente lnb de votes
+                else
+                {
+                    resultats.NombreDeVotes++;
+                }
+            }
+
+            return lesResultats;
+        }
+        #endregion
     }
 }

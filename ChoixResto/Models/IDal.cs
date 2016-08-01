@@ -26,5 +26,8 @@ namespace ChoixResto.Models
 
         //Méthodes sondage
         int CreerUnSondage();
+
+        //Méthodes résultats
+        List<Resultats> ObtenirLesResultats(int idSondage);
     }
 }

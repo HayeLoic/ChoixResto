@@ -13,7 +13,6 @@ public class DalTests
     [TestInitialize]
     public void Init_AvantChaqueTest()
     {
-        //test
         IDatabaseInitializer<BddContext> init = new DropCreateDatabaseAlways<BddContext>();
         Database.SetInitializer(init);
         init.InitializeDatabase(new BddContext());
@@ -168,7 +167,7 @@ public class DalTests
 
         Assert.IsTrue(aVote);
     }
-    /*
+    
     [TestMethod]
     public void ObtenirLesResultats_AvecQuelquesChoix_RetourneBienLesResultats()
     {
@@ -201,7 +200,7 @@ public class DalTests
         Assert.AreEqual("Resto ride", resultats[2].Nom);
         Assert.AreEqual("0102030405", resultats[2].Telephone);
     }
-
+    /*
     [TestMethod]
     public void ObtenirLesResultats_AvecDeuxSondages_RetourneBienLesBonsResultats()
     {
