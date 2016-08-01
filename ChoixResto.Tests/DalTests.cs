@@ -200,7 +200,7 @@ public class DalTests
         Assert.AreEqual("Resto ride", resultats[2].Nom);
         Assert.AreEqual("0102030405", resultats[2].Telephone);
     }
-    /*
+    
     [TestMethod]
     public void ObtenirLesResultats_AvecDeuxSondages_RetourneBienLesBonsResultats()
     {
@@ -248,5 +248,5 @@ public class DalTests
         Assert.AreEqual(1, resultats2[2].NombreDeVotes);
         Assert.AreEqual("Resto pinière", resultats2[2].Nom);
         Assert.AreEqual("0102030405", resultats2[2].Telephone);
-    }*/
+    }
 }
