@@ -13,6 +13,7 @@ public class DalTests
     [TestInitialize]
     public void Init_AvantChaqueTest()
     {
+        //test
         IDatabaseInitializer<BddContext> init = new DropCreateDatabaseAlways<BddContext>();
         Database.SetInitializer(init);
         init.InitializeDatabase(new BddContext());
