@@ -106,8 +106,6 @@ namespace ChoixResto.Models
 
                 //Rattachement du vote au sondage
                 sondageTrouve.Votes.Add(vote);
-                bdd.Sondages.Attach(sondageTrouve);
-                bdd.Entry(sondageTrouve).State = EntityState.Modified;
 
                 bdd.SaveChanges();
             }
