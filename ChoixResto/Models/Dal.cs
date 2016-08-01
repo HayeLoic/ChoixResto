@@ -70,9 +70,13 @@ namespace ChoixResto.Models
 
         public int AjouterUtilisateur(string prenom, string motDePasse)
         {
-            bdd.Utilisateurs.Add(new Utilisateur { Prenom = prenom, MotDePasse = motDePasse });
+            //Création de l'utilisateur
+            Utilisateur utilisateur = new Utilisateur { Prenom = prenom, MotDePasse = motDePasse };
+            bdd.Utilisateurs.Add(utilisateur);
             bdd.SaveChanges();
-            return bdd.Utilisateurs.FirstOrDefault(util => util.Prenom == prenom).Id;
+
+            //On retourne son id
+            return utilisateur.Id;
         }
 
         public Utilisateur Authentifier(string prenom, string motDePasse)
