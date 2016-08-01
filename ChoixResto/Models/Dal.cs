@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -81,16 +82,61 @@ namespace ChoixResto.Models
         #endregion
 
         #region Vote
+        public void AjouterVote(int idSondage, int idResto, int idUtilisateur)
+        {
+            //On récupère le sondage, le resto et l'utilisateur données en param
+            Sondage sondageTrouve = bdd.Sondages.FirstOrDefault(sondage => sondage.Id == idSondage);
+            Resto restoTrouve = bdd.Restos.FirstOrDefault(resto => resto.Id == idResto);
+            Utilisateur utilisateurTrouve = ObtenirUtilisateur(idUtilisateur);
+
+            if (sondageTrouve != null && restoTrouve != null && utilisateurTrouve != null)
+            {
+                //Création de l'objet vote
+                Vote vote = new Vote { Resto = restoTrouve, Utilisateur = utilisateurTrouve };
+
+                //Création du vote en base
+                bdd.Votes.Add(vote);
+
+                //Si c'est le 1er vote ajouté, instancier la liste
+                if (sondageTrouve.Votes == null) sondageTrouve.Votes = new List<Vote>();
+
+                //Rattachement du vote au sondage
+                sondageTrouve.Votes.Add(vote);
+                bdd.Sondages.Attach(sondageTrouve);
+                bdd.Entry(sondageTrouve).State = EntityState.Modified;
+
+                bdd.SaveChanges();
+            }
+        }
+
         public bool ADejaVote(int idSondage, string idUtilisateur)
         {
+            bool _ADejaVote = false;
+
+            //On récupère l'utilisateur donnée en param
             Utilisateur utilisateurTrouve = ObtenirUtilisateur(idUtilisateur);
-            if (utilisateurTrouve == null)
-                return false;
-            else
+
+            if (utilisateurTrouve != null)
             {
-                Vote voteTrouve = bdd.Votes.FirstOrDefault(vote => vote.Sondage.Id == idSondage && vote.Utilisateur.Id == utilisateurTrouve.Id);
-                return (voteTrouve == null ? false : true);
+                //le sondage correspondant à l'id en param
+                Sondage sondageTrouve = bdd.Sondages.FirstOrDefault(sondage => sondage.Id == idSondage);
+
+                //Si le sondage existe, on regarde si un vote est fait par l'utilisateur en param
+                if (sondageTrouve != null)
+                {
+                    //On récupère la liste des votes faits pour ce sondage
+                    List<Vote> votes = sondageTrouve.Votes;
+
+                    if (votes != null)
+                    {
+                        Vote voteTrouve = votes.FirstOrDefault(vote => vote.Utilisateur.Id == utilisateurTrouve.Id);
+
+                        //Si on trouve un vote dans la liste, c'est que l'utilisateur a deja voté
+                        if (voteTrouve != null) _ADejaVote = true;
+                    }
+                }
             }
+            return _ADejaVote;
         }
         #endregion
 

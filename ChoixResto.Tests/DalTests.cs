@@ -154,7 +154,7 @@ public class DalTests
 
         Assert.IsFalse(pasVote);
     }
-    /*
+    
     [TestMethod]
     public void ADejaVote_UtilisateurAVote_RetourneTrue()
     {
@@ -167,7 +167,7 @@ public class DalTests
 
         Assert.IsTrue(aVote);
     }
-
+    /*
     [TestMethod]
     public void ObtenirLesResultats_AvecQuelquesChoix_RetourneBienLesResultats()
     {

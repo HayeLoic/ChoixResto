@@ -21,6 +21,7 @@ namespace ChoixResto.Models
         Utilisateur Authentifier(string prenom, string mdp);
 
         //Méthodes vote
+        void AjouterVote(int idSondage, int idResto, int idUtilisateur);
         bool ADejaVote(int idSondage, string idUtilisateur);
 
         //Méthodes sondage
