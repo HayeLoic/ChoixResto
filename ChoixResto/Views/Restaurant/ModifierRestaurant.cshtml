@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ModifierRestaurant</title>
+    <link type="text/css" href="../../Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     @using (Html.BeginForm())
@@ -19,6 +20,7 @@
             <div>
                 @Html.LabelFor(model => model.Nom)
                 @Html.TextBoxFor(model => model.Nom)
+                @Html.ValidationMessageFor(model => model.Nom)
             </div>
             <div>
                 @Html.LabelFor(model => model.Telephone)

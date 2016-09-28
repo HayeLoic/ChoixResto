@@ -34,24 +34,12 @@ namespace ChoixResto.Controllers
             else
                 return View("Error");
         }
-        /*
-        [HttpPost]
-        public ActionResult ModifierRestaurant(int? id, string nom, string telephone)
-        {
-            if (id.HasValue)
-            {
-                using (IDal dal = new Dal())
-                {
-                    dal.ModifierRestaurant(id.Value, nom, telephone);
-                    return RedirectToAction("Index");
-                }
-            }
-            else
-                return View("Error");
-        }*/
+
         [HttpPost]
         public ActionResult ModifierRestaurant(Resto resto)
         {
+            if (!ModelState.IsValid)
+                return View(resto);
             using (IDal dal = new Dal())
             {
                 dal.ModifierRestaurant(resto.Id, resto.Nom, resto.Telephone);
