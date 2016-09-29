@@ -12,7 +12,9 @@ namespace ChoixResto.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Le nom du restaurant doit être saisi")]
+        [StringLength(80)]
         public string Nom { get; set; }
+        [RegularExpression(@"^0[0-9]{9}$", ErrorMessage = "Le numéro de téléphone est incorrect")]
         public string Telephone { get; set; }
     }
 }
