@@ -8,8 +8,25 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link type="text/css" href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div>Je suis la vue index</div>
+    <div>
+        <h1>
+            Prêt à choisir un restaurant ?
+        </h1>
+    </div>
+    <div>
+        <br />
+        @Html.ActionLink("Créer un sondage", "CreerSondage", "Sondage", null, new { @class = "btnBleu" })
+    </div>
+    <div>
+        <br />
+        @Html.ActionLink("Ajouter un restaurant", "CreerRestaurant", "Restaurant", null, new { @class = "btnBleu" })
+    </div>
+    <div>
+        <br />
+        @Html.ActionLink("Modifier les restaurants", "Index", "Restaurant", null, new { @class = "btnBleu" })
+    </div>
 </body>
 </html>
