@@ -18,3 +18,11 @@
 input[type="checkbox"].input-validation-error {
     outline: 2px solid #f00;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid black;
+}
