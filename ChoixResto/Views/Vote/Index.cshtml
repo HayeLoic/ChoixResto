@@ -1,0 +1,31 @@
+﻿@model List<ChoixResto.ViewModels.VoteRestoViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Vote</title>
+</head>
+<body>
+    <p>
+        Cochez les restaurants où vous voulez bien aller. Attention, le vote est définitif !
+    </p>
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            @foreach (var voteResto in Model)
+            {
+                @Html.CheckBox(voteResto.Resto.Nom)
+                @Html.Label(voteResto.Resto.Nom)
+                <br />
+            }
+            <input type="submit" value="Valider" />
+        </fieldset>
+    }
+</body>
+</html>
