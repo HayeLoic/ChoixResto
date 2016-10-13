@@ -51,12 +51,38 @@ namespace ChoixResto.Models
         #endregion
 
         #region Utilisateur
+        public Utilisateur ObtenirUtilisateur(string idStr)
+        {
+            switch (idStr)
+            {
+                case "Chrome":
+                    return CreeOuRecupere("Chrome", "1234");
+                case "IE":
+                    return CreeOuRecupere("IE", "1234");
+                case "Firefox":
+                    return CreeOuRecupere("Firefox", "1234");
+                default:
+                    return CreeOuRecupere("Autre", "1234");
+            }
+        }
+
+        private Utilisateur CreeOuRecupere(string nom, string motDePasse)
+        {
+            Utilisateur utilisateur = Authentifier(nom, motDePasse);
+            if (utilisateur == null)
+            {
+                int id = AjouterUtilisateur(nom, motDePasse);
+                return ObtenirUtilisateur(id);
+            }
+            return utilisateur;
+        }
+
         public Utilisateur ObtenirUtilisateur(int id)
         {
             return bdd.Utilisateurs.FirstOrDefault(util => util.Id == id);
         }
 
-        public Utilisateur ObtenirUtilisateur(string prenom)
+        /*public Utilisateur ObtenirUtilisateur(string prenom)
         {
             //Si on passe un int entre quotes, on appel l'autre méthode
             int n;
@@ -66,7 +92,7 @@ namespace ChoixResto.Models
                 return ObtenirUtilisateur(n);
             else
                 return bdd.Utilisateurs.FirstOrDefault(util => util.Prenom == prenom);
-        }
+        }*/
 
         public int AjouterUtilisateur(string prenom, string motDePasse)
         {
@@ -110,7 +136,7 @@ namespace ChoixResto.Models
                 bdd.SaveChanges();
             }
         }
-
+        /*
         public bool ADejaVote(int idSondage, string idUtilisateur)
         {
             bool _ADejaVote = false;
@@ -139,6 +165,18 @@ namespace ChoixResto.Models
                 }
             }
             return _ADejaVote;
+        }*/
+        public bool ADejaVote(int idSondage, string idStr)
+        {
+            Utilisateur utilisateur = ObtenirUtilisateur(idStr);
+            if (utilisateur != null)
+            {
+                Sondage sondage = bdd.Sondages.First(s => s.Id == idSondage);
+                if (sondage.Votes == null)
+                    return false;
+                return sondage.Votes.Any(v => v.Utilisateur != null && v.Utilisateur.Id == utilisateur.Id);
+            }
+            return false;
         }
         #endregion
 

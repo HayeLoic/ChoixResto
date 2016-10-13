@@ -29,7 +29,35 @@ namespace ChoixResto.Controllers
 
             voteRestoViewModel.listResto = dal.ObtientTousLesRestaurants();
             voteRestoViewModel.idSondage = idSondage;
-            voteRestoViewModel.erreur = string.Empty;
+
+            string utilisateur = Request.Browser.Browser;
+            if (dal.ADejaVote(idSondage, utilisateur))
+                voteRestoViewModel.erreur = "Vous avez déjà voté.";
+            else
+                voteRestoViewModel.erreur = string.Empty;
+
+            return View(voteRestoViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Index(VoteRestoViewModel voteRestoViewModel)
+        {
+            Utilisateur utilisateur = dal.ObtenirUtilisateur(Request.Browser.Browser);
+            if (dal.ADejaVote(voteRestoViewModel.idSondage, utilisateur.Id.ToString()))
+                voteRestoViewModel.erreur = "Vous avez déjà voté.";
+            else if (voteRestoViewModel.listResto == null)
+            {
+                voteRestoViewModel.erreur = "Vous devez choisir au moins un restaurant.";
+                voteRestoViewModel.listResto = dal.ObtientTousLesRestaurants();
+            }
+            else
+            {
+                foreach (Resto resto in voteRestoViewModel.listResto)
+                {
+                    dal.AjouterVote(voteRestoViewModel.idSondage, resto.Id, utilisateur.Id);
+                }
+                voteRestoViewModel.erreur = "Vote pris en compte.";
+            }
 
             return View(voteRestoViewModel);
         }
