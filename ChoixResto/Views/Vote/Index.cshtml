@@ -1,4 +1,4 @@
-﻿@model List<ChoixResto.ViewModels.VoteRestoViewModel>
+﻿@model ChoixResto.ViewModels.VoteRestoViewModel
 
 @{
     Layout = null;
@@ -18,10 +18,12 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            @foreach (var voteResto in Model)
+            @Model.erreur
+            <br />
+            @foreach (var resto in Model.listResto)
             {
-                @Html.CheckBox(voteResto.Resto.Nom)
-                @Html.Label(voteResto.Resto.Nom)
+                @Html.CheckBox(resto.Nom)
+                @Html.Label(resto.Nom)
                 <br />
             }
             <input type="submit" value="Valider" />

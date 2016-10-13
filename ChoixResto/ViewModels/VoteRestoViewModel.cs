@@ -7,7 +7,8 @@ namespace ChoixResto.ViewModels
 {
     public class VoteRestoViewModel
     {
-        public Models.Resto Resto { get; set; }
-        public bool RestoChecked { get; set; }
+        public List<Models.Resto> listResto { get; set; }
+        public int idSondage { get; set; }
+        public string erreur { get; set; }
     }
 }

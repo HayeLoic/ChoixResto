@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChoixResto.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,18 @@ namespace ChoixResto.Controllers
 {
     public class SondageController : Controller
     {
+        private IDal dal;
+
+        public SondageController()
+            : this(new Dal())
+        {
+        }
+
+        public SondageController(IDal dalIoc)
+        {
+            dal = dalIoc;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -15,7 +28,8 @@ namespace ChoixResto.Controllers
 
         public ActionResult CreerSondage()
         {
-            return View();
+            int idSondage = dal.CreerUnSondage();
+            return RedirectToAction("Index","Vote",idSondage);
         }
     }
 }
