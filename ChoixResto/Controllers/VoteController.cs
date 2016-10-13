@@ -21,14 +21,14 @@ namespace ChoixResto.Controllers
         {
             dal = dalIoc;
         }
-        
-        public ActionResult Index()
+
+        public ActionResult Index(int idSondage)
         {
             //Objet à retourner, contient les restos, l'id du sondage et l'éventuel message d'erreur
             VoteRestoViewModel voteRestoViewModel = new VoteRestoViewModel();
 
             voteRestoViewModel.listResto = dal.ObtientTousLesRestaurants();
-            voteRestoViewModel.idSondage = 1;
+            voteRestoViewModel.idSondage = idSondage;
             voteRestoViewModel.erreur = string.Empty;
 
             return View(voteRestoViewModel);

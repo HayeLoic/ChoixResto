@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ChoixResto.Controllers
 {
@@ -29,7 +30,7 @@ namespace ChoixResto.Controllers
         public ActionResult CreerSondage()
         {
             int idSondage = dal.CreerUnSondage();
-            return RedirectToAction("Index","Vote",idSondage);
+            return RedirectToAction("Index", new RouteValueDictionary(new { controller = "Vote", action = "Index", idSondage = idSondage }));
         }
     }
 }
