@@ -1,4 +1,4 @@
-﻿@model ChoixResto.ViewModels.VoteRestoViewModel
+﻿@model ChoixResto.ViewModels.ListVoteRestoViewModel
 
 @{
     Layout = null;
@@ -18,15 +18,21 @@
     @using (Html.BeginForm())
     {
         <fieldset>
-            @Model.erreur
+            @Model.MessageErreur
+            @Model.MessageSucces
             <br />
-            @foreach (var resto in Model.listResto)
+
+            @if (string.IsNullOrEmpty(Model.MessageErreur))
             {
-                @Html.CheckBox(resto.Nom)
-                @Html.Label(resto.Nom)
-                <br />
+                foreach (var resto in Model.listVoteResto)
+                {
+                    @Html.CheckBox(resto.Resto.Nom)
+                    @Html.Label(resto.Resto.Nom)
+                    @Html.EditorFor(x => resto)
+                    <br />
+                }
+                <input type="submit" value="Valider" />
             }
-            <input type="submit" value="Valider" />
         </fieldset>
     }
 </body>

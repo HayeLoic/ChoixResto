@@ -123,6 +123,7 @@
     <Compile Include="Models\Vote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AccueilViewModel.cs" />
+    <Compile Include="ViewModels\ListVoteRestoViewModel.cs" />
     <Compile Include="ViewModels\VoteRestoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
